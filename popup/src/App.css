@@ -88,5 +88,10 @@ body {
 }
 
 p {
-  @apply inline-flex w-full;
+  @apply inline-flex w-full align-middle;
+    align-items: center;
+  }
+  
+  p>svg {
+    @apply h-3 w-3 mr-2 flex-shrink-0;
 }

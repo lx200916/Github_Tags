@@ -4,7 +4,8 @@ import "./App.css"
 import {
   MagnifyingGlassIcon,
   QuoteIcon,
-  SewingPinFilledIcon
+  SewingPinFilledIcon,
+  MixIcon
 } from "@radix-ui/react-icons"
 import {
   Popover,
@@ -85,7 +86,7 @@ function App() {
           <Popover className="w-full p-0" open={open} onOpenChange={setOpen}>
             <PopoverTrigger className="w-full p-0">
               <div className="flex flex-wrap  rounded-md border border-input bg-transparent p-2 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50">
-                <MagnifyingGlassIcon className=" flex-none w-6 h-6" />
+                <MixIcon className=" flex-none w-5 h-5" />
                 <div className="flex-none w-2"></div>
                 {tags.length == 0 && (
                   <div
@@ -239,14 +240,14 @@ const UserCard = ({ userId, className, searchTags, onClickTags }) => {
           <CardContent style={{ marginTop: "-0.5rem" }}>
             {user.bio && (
               <p>
-                <QuoteIcon className="mr-2" />
+                <QuoteIcon />
                 <div>{user.bio}</div>
               </p>
             )}
 
             {user.address && (
               <p>
-                <SewingPinFilledIcon className="mr-2" />
+                <SewingPinFilledIcon />
                 <div>{user.address}</div>
               </p>
             )}
@@ -256,7 +257,9 @@ const UserCard = ({ userId, className, searchTags, onClickTags }) => {
                   variant={searchTags.includes(tag) ? "primary" : "default"}
                   key={tag}
                   className={"m-0.5 h-5"}
-                  onClick={() => onClickTags(tag)}>
+                  onClick={(event) =>
+                    event.stopPropagation() || onClickTags(tag)
+                  }>
                   {tag}
                 </Badge>
               ))}
