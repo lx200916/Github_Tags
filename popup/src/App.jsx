@@ -86,24 +86,32 @@ function App() {
           <Popover className="w-full p-0" open={open} onOpenChange={setOpen}>
             <PopoverTrigger className="w-full p-0">
               <div className="flex flex-wrap  rounded-md border border-input bg-transparent p-2 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50">
-                <MixIcon className=" flex-none w-5 h-5" />
+                <MixIcon className=" flex-none w-5 h-5 self-center" />
                 <div className="flex-none w-2"></div>
                 {tags.length == 0 && (
                   <div
-                    className="grow text-muted-foreground inline-flex items-center align-middle font-medium"
-                    role="placeholder">
+                    className="grow text-muted-foreground inline-flex items-center align-middle font-medium leading-6 "
+                    role="placeholder"
+                    style={{ padding: "1px" }}>
                     Input Tag to Filter
                   </div>
                 )}
-                {tags.length > 0 &&
-                  tags.map((tag) => (
-                    <Badge
-                      key={tag}
-                      className="flex-none m-0.5"
-                      onClick={() => setTags(tags.filter((v) => v != tag))}>
-                      {tag}
-                    </Badge>
-                  ))}
+                {tags.length > 0 && (
+                  <>
+                    {tags.map((tag) => (
+                      <Badge
+                        key={tag}
+                        className="flex-none m-0.5"
+                        onClick={() => setTags(tags.filter((v) => v != tag))}>
+                        {tag}
+                      </Badge>
+                    ))}
+                    <div className="flex-none ml-auto self-center text-muted text-lg mr-4 font-bold leading-none	">
+                      {" "}
+                      {result.length}
+                    </div>
+                  </>
+                )}
               </div>
             </PopoverTrigger>
             <PopoverContent
