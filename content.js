@@ -26,7 +26,13 @@
           if (infoJson != null) {
             const info = JSON.parse(infoJson)
             // console.log(info);
-            const ghUsername = info["payload"]["card_user_login"]
+            let ghUsername = info["payload"]["card_user_login"]
+            if (ghUsername == null) {
+              // Try new Dashboard?
+              const ghUrl = info["payload"]["originating_url"]
+              //github.com/users/codehz/hovercard?event_type=feeds.feed_click
+              https: ghUsername = ghUrl.split("/")[4]
+            }
             if (ghUsername != null) {
               console.log(ghUsername)
               let tags = await getTags(ghUsername)
